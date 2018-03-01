@@ -1,79 +1,79 @@
 ---
-title: Getting Started
+title: 시작하기
 layout: tutorial
 ---
 
 
-## Install Go
+## Go 설치
 
-Before you can use Revel, first you need to [install Go](http://golang.org/doc/install).
+Revel을 사용하려면 먼저 [Go를 설치](http://golang.org/doc/install)해야합니다.
 
-- See the official [Go installation guide](https://golang.org/doc/install).
+- 공식 문서 [Go 설치 안내서](https://golang.org/doc/install)를 참조하세요.
     - [Ubuntu](https://github.com/golang/go/wiki/Ubuntu)
     - [Windows](https://golang.org/doc/install#windows)
 
-### Set up your GOPATH
+### GOPATH 설정
 
-If you have not created a GOPATH as part of the installation, do so now. The `GOPATH`
-is a directory where all of your Go code will live. Here is one way of setting it up:
+만약 설치하는 도중 GOPATH를 설정하지 않았다면 지금 설정하세요.
 
-1. Make a directory: `mkdir ~/gocode`
-2. Tell Go to use that as your GOPATH: `export GOPATH=~/gocode`
-3. Save your GOPATH so that it will apply to all future shell sessions: `echo export GOPATH=$GOPATH >> ~/.bash_profile`
+`GOPATH`는 당신의 모든 Go 코드가 실행되는 디렉토리입니다. 설정 방법은 다음과 같습니다.
 
-Note that depending on your shell, you may need to adjust (3) to write the export into a different configuration file (e.g. *~/.bashrc*, *~/.zshrc, etc.).
+1. 디렉토리 만들기: `mkdir ~/gocode`
+2. Go가 당신의 GOPATH를 적용하도록 명령: `export GOPATH=~/gocode`
+3. 앞으로 모든 셸 세션에 GOPATH가 적용되도록 저장하기: `echo export GOPATH=$GOPATH >> ~/.bash_profile`
 
-Now your Go installation is complete.
+환경에 따라 다른 설정 파일 (예: *~/.bashrc*, *~/.zshrc, etc.)에 export 명령을 작성해야 할 수도 있습니다.
 
-## Install git and hg
+이제 Go 설치가 끝났습니다.
 
-Git and Mercurial are required to allow `go get` to clone various dependencies.
+## git과 hg 설치
 
-* [Installing Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
-* [Installing Mercurial](https://www.mercurial-scm.org/downloads)
+`go get`을 사용해 다양한 의존성을 복제하기 위해 Git과 Mercurial이 필요합니다.
 
-## Get the Revel framework
+* [Git 설치](http://git-scm.com/book/en/Getting-Started-Installing-Git)
+* [Mercurial 설치](https://www.mercurial-scm.org/downloads)
 
-To get the Revel framework, run
+## Revel 프레임워크 가져오기
+
+Revel 프레임워크를 가져오려면 다음 명령을 실행하세요.
 
 	go get github.com/revel/revel
 
-This command does a couple of things:
+이 명령은 몇 가지 작업을 수행합니다.
 
-* Go uses git to clone the repository into `$GOPATH/src/github.com/revel/revel/`
-* Go transitively finds all of the dependencies and runs `go get` on them as well.
+* Go는 git을 사용해 저장소를 `$GOPATH/src/github.com/revel/revel/`에 복제합니다.
+* Go는 모든 의존성을 찾아 `go get`을 실행합니다.
 
-### Get and Build the Revel command line tool
+### Revel 명령줄 도구를 가져와서 빌드
 
-The [`revel`](tool.html) command line tool is used 
-to [`build`](tool.html#build), [`run`](tool.html#run), and [`package`](tool.html#package) Revel applications.
+[`revel`](tool.html) 명령줄 도구는 Revel 앱에 [`build`](tool.html#build), [`run`](tool.html#run), [`package`](tool.html#package) 명령을 사용할 수 있습니다.
 
-Use `go get` to install:
+설치하려면 `go get`을 사용하세요:
 
 	go get github.com/revel/cmd/revel
 
-Ensure the `$GOPATH/bin` directory is in your PATH so that you can reference the command from anywhere.
+`$GOPATH/bin`을 PATH 환경변수에 추가하세요. 그러면 어디서나 명령을 사용할 수 있습니다.
 
 	export PATH="$PATH:$GOPATH/bin"
 
-Verify that it works:
+작동되는지 확인하세요:
 
 	$ revel help
 	~
 	~ revel! http://revel.github.io
 	~
-	usage: revel command [arguments]
+	사용법: revel command [arguments]
 
-	The commands are:
+	명령은 다음과 같습니다:
 
-	    new         create a skeleton Revel application
-	    run         run a Revel application
-	    build       build a Revel application (e.g. for deployment)
-	    package     package a Revel application (e.g. for deployment)
-	    clean       clean a Revel application's temp files
-	    test        run all tests from the command-line
+	    new         뼈대 Revel 앱을 만듭니다
+	    run         Revel 앱을 실행합니다
+	    build       Revel 앱을 빌드합니다 (예: 개발용)
+	    package     Revel 앱을 패키징합니다 (예: 개발용)
+	    clean       Revel 앱의 임시 파일을 청소합니다
+	    test        명령줄에서 모든 테스트를 실행합니다
 
-	Use "revel help [command]" for more information.
+	자세한 내용은 "revel help [명령]"을 사용하세요.
 
 
-<a href="createapp.html" class="btn btn-sm btn-success" role="button">Next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> [Create a new Revel application.](createapp.html)
+<a href="createapp.html" class="btn btn-sm btn-success" role="button">다음 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> [새 Revel 앱 만들기.](createapp.html)
