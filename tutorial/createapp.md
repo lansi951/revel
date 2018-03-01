@@ -33,7 +33,7 @@ $ revel run github.com/myaccount/myapp
 
 ![Your Application Is Ready]({{ layout.root }}/img/YourApplicationIsReady.png)
 
-- 생성된 프로젝트 구조는 [organization]({{ layout.root }}/manual/organization.html)에 설명되어 있습니다.
+- 생성된 프로젝트 구조는 [구조]({{ layout.root }}/manual/organization.html)에 설명되어 있습니다.
 - HTTP 포트 설정은 [`conf/app.conf`]({{ layout.root }}/manual/appconf.html#httpport)에서 볼 수 있습니다.
 
-<a href="requestflow.html" class="btn btn-sm btn-success" role="button">Next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> [Revel이 요청을 처리하는 방법.](requestflow.html)
+<a href="requestflow.html" class="btn btn-sm btn-success" role="button">다음 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> [Revel이 요청을 처리하는 방법.](requestflow.html)

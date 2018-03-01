@@ -46,7 +46,7 @@ Revel 프레임워크를 가져오려면 다음 명령을 실행하세요.
 
 ### Revel 명령줄 도구를 가져와서 빌드
 
-[`revel`](tool.html) 명령줄 도구는 Revel 앱에 [`build`](tool.html#build), [`run`](tool.html#run), [`package`](tool.html#package) 명령을 사용할 수 있습니다.
+[`revel`](tool.html) 명령줄 도구는 Revel 앱에 [`build`]({{ layout.root }}/manual/tool.html#build), [`run`]({{ layout.root }}/manual/tool.html#run), [`package`]({{ layout.root }}/manual/tool.html#package) 명령을 사용할 수 있습니다.
 
 설치하려면 `go get`을 사용하세요:
 
