@@ -1,24 +1,24 @@
 ---
-title: The Request Flow
+title: 요청 흐름
 layout: tutorial
 ---
 
-In the [previous page](createapp.html) we created a new Revel application
-called **myapp**. On this page we look at how Revel handles the HTTP request
-to `http://localhost:9000/` resulting in the welcome message.
+[이전 페이지](createapp.html)에서 **myapp**이라고 하는 새 Revel 앱을 만들었습니다.
+이 페이지에서는 Revel이 어떻게 `http://localhost:9000/`의 HTTP 요청을 처리해서
+환영 메세지를 보여주는지 살펴봅니다.
 
-## Routes
+## 라우트
 
-The first thing that Revel does is check the `conf/routes` file (see [routing](/manual/routing.html)):
+Revel이 첫번째로 하는 일은 `conf/routes` 파일을 확인하는 것입니다 ([라우팅]({{ layout.root }}/manual/routing.html) 참조):
 
 	GET     /     App.Index
 
-This tells Revel to invoke the **`Index`** method of the **`App`**
-[controller](/manual/controllers.html) when it receives a http **`GET`** request to **`/`**.
+이 구문은 Revel에서 **`/`**로 http **`GET`** 요청을 받았을 때,
+**`App`** [컨트롤러]({{ layout.root }}/manual/controllers.html)의 **`Index`** 메소드를 호출하도록 합니다.
 
-## Controller Methods 
+## 컨트롤러 메소드
 
-Let's follow this call to the code, in **app/controllers/app.go**:
+**app/controllers/app.go** 코드를 봅시다:
 ```go
 package controllers
 
@@ -33,21 +33,17 @@ func (c App) Index() revel.Result {
 }
 ```
 
-All [controllers](/manual/controllers.html) must be a `struct` that embeds a [`*revel.Controller`](https://godoc.org/github.com/revel/revel#Controller)
-in the first slot. Any method on a controller that is
-exported and returns a [`revel.Result`](/manual/results.html) may be used as 
-part of an **Action**, in the above example **App.Index** is the **Action**.
+모든 [컨트롤러]({{ layout.root }}/manual/controllers.html)는 제일 먼저 [`*revel.Controller`](https://godoc.org/github.com/revel/revel#Controller)를 포함하는 `구조체`여야 합니다.
+[`revel.Result`]({{ layout.root }}/manual/results.html)를 반환하는 컨트롤러의 모든 메소드는 **Action**의 일부로 사용할 수 있습니다. 위의 예제에서 **App.Index**는 **Action**입니다.
 
-The Revel controller provides many useful methods for generating [Results](/manual/results.html). In
-this example, it calls [`Render()`](https://godoc.org/github.com/revel/revel#Controller.Render),
-which tells Revel to find and render a [template](/manual/templates.html) as the response with http `200 OK`.
+Revel 컨트롤러는 [결과]({{ layout.root }}/manual/results.html)를 만드는데 유용한 여러 가지 방법을 제공합니다.
+이 예제에서는 [`Render()`](https://godoc.org/github.com/revel/revel#Controller.Render)를 호출해 Revel에게 [템플릿]({{ layout.root }}/manual/templates.html)을 찾아 렌더링해 http `200 OK`로 응답하도록 합니다.
 
-## Templates
+## 템플릿
 
-[Templates](/manual/templates.html) are  in the **app/views** directory. When an explicit
-template name is not specified, Revel looks for a template matching the controller/method.
-In this case, Revel finds the **app/views/App/Index.html** file, and
-renders it as a [Go template](http://www.golang.org/pkg/html/template).
+[템플릿]({{ layout.root }}/manual/templates.html)은 **app/views** 디렉토리에 있습니다.
+명시적으로 템플릿 이름을 지정하지 않으면, Revel은 controller/method와 일치하는 템플릿을 찾습니다.
+이 경우에는 Revel은 **app/views/App/Index.html**을 찾아서 [Go 템플릿](http://www.golang.org/pkg/html/template)으로 렌더링합니다.
 
 {% capture ex %}{% raw %}
 {{set . "title" "Home"}}
@@ -74,18 +70,17 @@ renders it as a [Go template](http://www.golang.org/pkg/html/template).
 {% endraw %}{% endcapture %}
 {% highlight htmldjango %}{{ex}}{% endhighlight %}
 
-Beyond the functions provided by the Go templates package, Revel adds
-[a few helpful ones](/manual/templates.html#functions) also.
+Go 템플릿 패키지가 제공하는 기능 외에도 Revel은 [몇가지 유용한 기능]({{ layout.root }}/manual/templates.html#functions)을 추가시켜줍니다.
 
-The template above : -
+위의 템플릿 설명:
 
-1. Adds a new **title** variable to the render context with [set](/manual/templates.html#set).
-2. Includes the **header.html** template, which uses the **title** variable.
-3. Displays a welcome message.
-4. Includes the **flash.html** template, which shows any [flashed](/manual/sessionflash.html#flash) messages.
-5. Includes the **footer.html**.
+1. [set]({{ layout.root }}/manual/templates.html#set)로 새 **title** 변수를 렌더링 컨텍스트에 추가합니다.
+2. **title** 변수를 사용하는 **header.html** 템플릿을 포함합니다.
+3. 환영 메세지를 표시합니다.
+4. [플래시]({{ layout.root }}/manual/sessionflash.html#flash) 된 메세지를 보여주는 **flash.html**을 포함합니다.
+5. **footer.html**을 포함합니다
 
-If you look at **header.html**, you can see some more template tags in action:
+**header.html**를 보면 좀 더 많은 템플릿 태그를 볼 수 있습니다:
 
 {% capture ex %}{% raw %}
 <!DOCTYPE html>
@@ -111,15 +106,14 @@ If you look at **header.html**, you can see some more template tags in action:
 {% endraw %}{% endcapture %}
 {% highlight htmldjango %}{{ex}}{% endhighlight %}
 
-You can see the [set](/manual/templates.html#set) `.title` being used, and also see that it accepts JS and CSS
-files included from calling templates in the **moreStyles** and **moreScripts**
-variables.
+[set]({{ layout.root }}/manual/templates.html#set)으로 설정된 `.title` 변수가 사용되는 걸 볼 수 있으며,
+**moreStyles**와 **moreScripts** 변수에서 템플릿을 호출할 때 포함된 JS 및 CSS 파일을 사용할 수 있습니다.
 
 ## Hot-reload
 
-Revel has [`watchers`](/manual/appconf.html#watchers) that check for changes to files and recompiles as part of the development cycle.
+Revel은 파일이 변경됐는지 확인해서 다시 컴파일하는 [`워쳐`]({{ layout.root }}/manual/appconf.html#watchers)를 개발주기의 일부로 가지고 있습니다.
 
-To demonstrate this, change the welcome message.  In **Index.html**, change
+그것을 확인하기 위해 **Index.html**의 환영 메세지를 변경하세요. 
 
 {% highlight html %}
 <h1>It works!</h1>
@@ -129,19 +123,19 @@ to
 <h1>Hello Revel</h1>
 {% endhighlight %}
 
-Refresh the browser, and you should see the change immediately!  Revel noticed
-that your template changed and reloaded it.
+브라우저를 새로고침하면 즉시 변경된 것을 볼 수 있습니다.
+템플릿이 변경되어 Revel이 다시 로드된 것을 확인했습니다.
 
-Revel watches  - see [config](/manual/appconf.html#watchers)):
+Revel watches  - [설정]({{ layout.root }}/manual/appconf.html#watchers)) 참고:
 
-* All go code under **app/**
-* All templates under **app/views/**
-* The routes file: **conf/routes**
+* 모든 **app/** 아래의 Go 코드
+* 모든 **app/views/** 아래의 템플릿
+* 라우트 파일: **conf/routes**
 
-Changes to any of those will cause Revel to update and compile the running app with the
-latest change in code.  Try it right now: open **app/controllers/app.go** and introduce an error.
+이 중 하나를 변경하면 Revel이 변경된 최신 코드로 실행중인 앱을 업데이트하고 컴파일합니다.
+지금 시도해보세요: **app/controllers/app.go** 열어 에러를 표시하게 합니다.
 
-Change
+수정
 {% highlight go %}
 return c.Render()
 {% endhighlight %}
@@ -149,37 +143,37 @@ to
 {% highlight go %}
 return c.Renderx()
 {% endhighlight %}
-Refresh the page and Revel will display a helpful error message:
+페이지를 새로고치면 Revel에 유용한 에러 메세지가 표시됩니다:
 
-![A helpful error message](/img/helpfulerror.png)
+![A helpful error message]({{ layout.root }}/img/helpfulerror.png)
 
-Lastly, let's pass some data into the template.
+마지막으로 템플릿으로 데이터를 보내봅니다.
 
-In **app/controllers/app.go**, change:
+**app/controllers/app.go**을:
 {% highlight go %}
 return c.Renderx()
 {% endhighlight %}
-to:
+다음으로 수정:
 {% highlight go %}
 greeting := "Aloha World"
 return c.Render(greeting)
 {% endhighlight %}
-And in the **app/views/App/Index.html** template, change:
+그리고 **app/views/App/Index.html** 템플릿을:
 
 {% capture ex %}{% raw %}
 <h1>Hello Revel</h1>
 {% endraw %}{% endcapture %}
 {% highlight htmldjango %}{{ex}}{% endhighlight %}
 
-to:
+다음으로 수정:
 
 {% capture ex %}{% raw %}
 <h1>{{.greeting}}</h1>
 {% endraw %}{% endcapture %}
 {% highlight htmldjango %}{{ex}}{% endhighlight %}
 
-Refresh the browser and to see a Hawaiian greeting.
+브라우저를 새로고침해 하와이 인사말을 볼 수 있습니다.
 
-![A Hawaiian greeting](/img/AlohaWorld.png)
+![A Hawaiian greeting]({{ layout.root }}/img/AlohaWorld.png)
 
-<a href="firstapp.html" class="btn btn-sm btn-success" role="button">Next <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> [Create the 'Hello World' application](firstapp.html)
+<a href="firstapp.html" class="btn btn-sm btn-success" role="button">다음 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a> ['Hello World' 앱 만들기](firstapp.html)
